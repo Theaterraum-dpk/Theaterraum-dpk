@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>테아터라움 철학하는 몸</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&family=Noto+Sans+KR:wght@300;400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f2f0eb;
+    --gold: #b89a5a;
+    --red: #8c1c13;
+    --gray: #3a3a3a;
+    --light-gray: #b0aca3;
+    --serif: 'Noto Serif KR', serif;
+    --mono: 'Space Mono', monospace;
+    --sans: 'Noto Sans KR', sans-serif;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--black);
+    color: var(--white);
+    font-family: var(--serif);
+    font-weight: 300;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ── 내비게이션 ── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 4rem;
+    border-bottom: 0.5px solid rgba(178,156,90,0.2);
+    background: rgba(10,10,10,0.88);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--light-gray);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover {
+    color: var(--gold);
+  }
+
+  /* ── 히어로 ── */
+  #hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 4rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 70% 30%, rgba(140,28,19,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(178,156,90,0.06) 0%, transparent 55%);
+  }
+
+  .hero-rule {
+    position: absolute;
+    top: 0;
+    left: 4rem;
+    bottom: 0;
+    width: 0.5px;
+    background: linear-gradient(to bottom, transparent 0%, var(--gold) 30%, var(--gold) 70%, transparent 100%);
+    opacity: 0.25;
+  }
+
+  .hero-index {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(3.2rem, 9vw, 8rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
+    position: relative;
+  }
+
+  .hero-title .sub {
+    display: block;
+    font-size: clamp(1.6rem, 4vw, 3.5rem);
+    font-weight: 300;
+    color: var(--light-gray);
+    letter-spacing: 0.04em;
+    margin-top: 0.5rem;
+  }
+
+  .hero-title .accent {
+    color: var(--gold);
+  }
+
+  .hero-desc {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--light-gray);
+    max-width: 34rem;
+    margin-top: 2.5rem;
+    line-height: 1.9;
+    padding-left: 1rem;
+    border-left: 1.5px solid var(--red);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    right: 4rem;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--light-gray);
+    writing-mode: vertical-rl;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .hero-scroll::after {
+    content: '';
+    display: block;
+    width: 0.5px;
+    height: 3rem;
+    background: var(--light-gray);
+    opacity: 0.4;
+  }
+
+  /* ── 공통 섹션 ── */
+  section {
+    padding: 7rem 4rem;
+    border-top: 0.5px solid rgba(178,156,90,0.1);
+  }
+
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+  }
+
+  /* ── About ── */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .about-left .quote {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 2.5vw, 2rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.6;
+    margin: 2rem 0;
+    padding-left: 2rem;
+    border-left: 2px solid var(--red);
+  }
+
+  .about-right p {
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    font-weight: 300;
+    color: var(--light-gray);
+    line-height: 2;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    border: 0.5px solid rgba(178,156,90,0.4);
+    padding: 0.35rem 0.8rem;
+  }
+
+  /* ── 공연 일정 ── */
+  #schedule {
+    background-color: #0d0d0d;
+  }
+
+  .schedule-grid {
+    display: grid;
+    gap: 1px;
+    background: rgba(178,156,90,0.1);
+    border: 0.5px solid rgba(178,156,90,0.1);
+    margin-top: 1rem;
+  }
+
+  .schedule-item {
+    background: var(--black);
+    display: grid;
+    grid-template-columns: 8rem 1fr auto;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 2.5rem;
+    transition: background 0.25s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .schedule-item:hover {
+    background: rgba(178,156,90,0.05);
+  }
+
+  .schedule-date {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    line-height: 1.6;
+  }
+
+  .schedule-info .title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+  }
+
+  .schedule-info .venue {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: var(--light-gray);
+    letter-spacing: 0.05em;
+  }
+
+  .schedule-cta {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+    color: var(--light-gray);
+    border: 0.5px solid rgba(176,172,163,0.3);
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+    transition: all 0.25s;
+  }
+
+  .schedule-item:hover .schedule-cta {
+    color: var(--gold);
+    border-color: rgba(178,156,90,0.5);
+  }
+
+  .schedule-badge {
+    display: inline-block;
+    background: var(--red);
+    color: var(--white);
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    padding: 0.2rem 0.5rem;
+    margin-left: 0.75rem;
+    vertical-align: middle;
+  }
+
+  /* ── 지난 공연 ── */
+  #archive {
+    overflow: hidden;
+  }
+
+  .archive-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .archive-card {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: var(--gray);
+    cursor: pointer;
+    border: 0.5px solid rgba(178,156,90,0.08);
+  }
+
+  .archive-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.15);
+    transition: transform 0.6s ease, filter 0.4s;
+  }
+
+  .archive-card:hover .archive-card-img {
+    transform: scale(1.04);
+    filter: grayscale(60%) contrast(1.1);
+  }
+
+  .archive-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.1) 50%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+  }
+
+  .archive-year {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+
+  .archive-name {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  .archive-detail {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 300;
+    color: var(--light-gray);
+    margin-top: 0.3rem;
+  }
+
+  /* 이미지가 없는 경우 플레이스홀더 */
+  .archive-card-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: repeating-linear-gradient(
+      45deg,
+      #1a1a1a,
+      #1a1a1a 2px,
+      #111 2px,
+      #111 12px
+    );
+  }
+
+  .archive-card-placeholder span {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: rgba(178,156,90,0.35);
+    text-transform: uppercase;
+  }
+
+  /* ── 단원 소개 ── */
+  #members {
+    background-color: #0d0d0d;
+  }
+
+  .members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .member-card {
+    border-top: 1px solid rgba(178,156,90,0.3);
+    padding-top: 1.25rem;
+  }
+
+  .member-role {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .member-name {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+
+  .member-bio {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: var(--light-gray);
+    line-height: 1.8;
+  }
+
+  /* ── 오시는 길 ── */
+  #location {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .location-address {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--light-gray);
+    line-height: 2.2;
+    margin-top: 1.5rem;
+  }
+
+  .location-address strong {
+    display: block;
+    color: var(--white);
+    font-weight: 400;
+    margin-top: 1.5rem;
+    margin-bottom: 0.25rem;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+  }
+
+  .map-placeholder {
+    aspect-ratio: 1 / 0.75;
+    background: var(--gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.5px solid rgba(178,156,90,0.1);
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: rgba(178,156,90,0.4);
+    text-transform: uppercase;
+    background: repeating-linear-gradient(
+      0deg,
+      #1c1c1c,
+      #1c1c1c 1px,
+      #161616 1px,
+      #161616 24px
+    );
+  }
+
+  /* ── 연락처/후원 ── */
+  #contact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .contact-list {
+    list-style: none;
+    margin-top: 1.5rem;
+  }
+
+  .contact-list li {
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 0;
+    border-bottom: 0.5px solid rgba(178,156,90,0.1);
+  }
+
+  .contact-list .label {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+
+  .contact-list .value {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--white);
+  }
+
+  .contact-list a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+
+  .contact-list a:hover {
+    color: var(--gold);
+  }
+
+  .support-box {
+    margin-top: 1.5rem;
+    border: 0.5px solid rgba(178,156,90,0.2);
+    padding: 2rem;
+  }
+
+  .support-box p {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--light-gray);
+    line-height: 2;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-support {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--gold);
+    padding: 0.85rem 2rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.25s, color 0.25s;
+  }
+
+  .btn-support:hover {
+    background: var(--white);
+    color: var(--black);
+  }
+
+  /* ── 푸터 ── */
+  footer {
+    border-top: 0.5px solid rgba(178,156,90,0.15);
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.5;
+  }
+
+  .footer-logo span {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+
+  .footer-copy {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    color: rgba(176,172,163,0.4);
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  /* ── 반응형 ── */
+  @media (max-width: 860px) {
+    nav {
+      padding: 1.2rem 1.5rem;
+    }
+    .nav-links {
+      display: none;
+    }
+    #hero {
+      padding: 0 1.5rem 4rem;
+    }
+    .hero-rule { left: 1.5rem; }
+    section {
+      padding: 4rem 1.5rem;
+    }
+    #about,
+    #location,
+    #contact {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .archive-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    footer {
+      padding: 2rem 1.5rem;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+    .footer-copy {
+      text-align: left;
+    }
+    .schedule-item {
+      grid-template-columns: 6rem 1fr;
+      gap: 1rem;
+    }
+    .schedule-cta { display: none; }
+  }
+
+  @media (max-width: 540px) {
+    .archive-grid {
+      grid-template-columns: 1fr;
+    }
+    .members-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* ── 진입 애니메이션 ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(1.5rem); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-index,
+  .hero-title,
+  .hero-desc {
+    animation: fadeUp 1s ease both;
+  }
+
+  .hero-index { animation-delay: 0.1s; }
+  .hero-title  { animation-delay: 0.3s; }
+  .hero-desc   { animation-delay: 0.55s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 내비게이션 -->
+<nav aria-label="주 메뉴">
+  <a href="#hero" class="nav-logo">THEATERRAUM</a>
+  <ul class="nav-links">
+    <li><a href="#about">소개</a></li>
+    <li><a href="#schedule">공연 일정</a></li>
+    <li><a href="#archive">지난 공연</a></li>
+    <li><a href="#members">단원</a></li>
+    <li><a href="#location">오시는 길</a></li>
+    <li><a href="#contact">연락 · 후원</a></li>
+  </ul>
+</nav>
+
+<!-- 히어로 -->
+<section id="hero" aria-label="인트로">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-rule" aria-hidden="true"></div>
+  <p class="hero-index">THEATERRAUM — 극단</p>
+  <h1 class="hero-title">
+    철학하는<br>
+    <span class="accent">몸</span>
+    <span class="sub">테아터라움</span>
+  </h1>
+  <p class="hero-desc">
+    몸은 사유하고, 무대는 질문한다.<br>
+    존재와 행위 사이 어딘가에서, 우리는 공연한다.
+  </p>
+  <p class="hero-scroll" aria-hidden="true">SCROLL</p>
+</section>
+
+<!-- 소개 -->
+<section id="about" aria-labelledby="about-title">
+  <div class="about-left">
+    <p class="section-eyebrow">001 — About</p>
+    <h2 class="section-title" id="about-title">극단 소개</h2>
+    <blockquote class="quote">
+      "철학은 텍스트가 아니라<br>무대 위 몸의 언어로 사유한다."
+    </blockquote>
+  </div>
+  <div class="about-right">
+    <p>
+      극단 테아터라움 철학하는 몸은 철학적 물음을 공연 언어로 번역하는
+      실험극단입니다. '테아터라움(Theaterraum)'—극장 공간—은 단순한
+      장소가 아니라 사유가 몸을 통해 현상하는 장소입니다.
+    </p>
+    <p>
+      우리는 텍스트, 신체, 공간, 관객의 관계를 재구성합니다.
+      아르토의 잔혹연극, 그로토프스키의 가난한 연극, 바르바의 연극인류학을
+      참조하되, 동시대 한국의 몸으로 새로 쓰입니다.
+    </p>
+    <p>
+      질문이 답보다 오래 남는 공연을 만듭니다.
+    </p>
+    <div class="about-tags">
+      <span class="tag">실험연극</span>
+      <span class="tag">신체극</span>
+      <span class="tag">철학적 퍼포먼스</span>
+      <span class="tag">앙상블</span>
+      <span class="tag">관객참여</span>
+    </div>
+  </div>
+</section>
+
+<!-- 공연 일정 -->
+<section id="schedule" aria-labelledby="schedule-title">
+  <p class="section-eyebrow">002 — Upcoming</p>
+  <h2 class="section-title" id="schedule-title">공연 일정</h2>
+
+  <div class="schedule-grid" role="list">
+
+    <a class="schedule-item" href="#" role="listitem">
+      <div class="schedule-date">
+        2025.09<br>12 — 21
+      </div>
+      <div class="schedule-info">
+        <p class="title">
+          「몸은 어디에 있는가」
+          <span class="schedule-badge">예매중</span>
+        </p>
+        <p class="venue">아르코예술극장 소극장, 서울</p>
+      </div>
+      <span class="schedule-cta">예매하기</span>
+    </a>
+
+    <a class="schedule-item" href="#" role="listitem">
+      <div class="schedule-date">
+        2025.11<br>07 — 09
+      </div>
+      <div class="schedule-info">
+        <p class="title">「거울 속의 타자」</p>
+        <p class="venue">남산예술센터 드라마센터, 서울</p>
+      </div>
+      <span class="schedule-cta">정보 보기</span>
+    </a>
+
+    <a class="schedule-item" href="#" role="listitem">
+      <div class="schedule-date">
+        2026.02<br>14 — 22
+      </div>
+      <div class="schedule-info">
+        <p class="title">「언어 이전의 목소리」</p>
+        <p class="venue">대학로예술극장 소극장, 서울</p>
+      </div>
+      <span class="schedule-cta">정보 보기</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- 지난 공연 -->
+<section id="archive" aria-labelledby="archive-title">
+  <p class="section-eyebrow">003 — Archive</p>
+  <h2 class="section-title" id="archive-title">지난 공연</h2>
+
+  <div class="archive-grid">
+
+    <div class="archive-card">
+      <div class="archive-card-placeholder"><span>사진 준비 중</span></div>
+      <div class="archive-card-overlay">
+        <p class="archive-year">2024</p>
+        <p class="archive-name">「경계의 목소리」</p>
+        <p class="archive-detail">아르코예술극장 / 18회 공연</p>
+      </div>
+    </div>
+
+    <div class="archive-card">
+      <div class="archive-card-placeholder"><span>사진 준비 중</span></div>
+      <div class="archive-card-overlay">
+        <p class="archive-year">2023</p>
+        <p class="archive-name">「침묵의 해부학」</p>
+        <p class="archive-detail">국립극단 소극장 판 / 12회 공연</p>
+      </div>
+    </div>
+
+    <div class="archive-card">
+      <div class="archive-card-placeholder"><span>사진 준비 중</span></div>
+      <div class="archive-card-overlay">
+        <p class="archive-year">2022</p>
+        <p class="archive-name">「잔류하는 몸」</p>
+        <p class="archive-detail">두산아트센터 Space111 / 10회 공연</p>
+      </div>
+    </div>
+
+    <div class="archive-card">
+      <div class="archive-card-placeholder"><span>사진 준비 중</span></div>
+      <div class="archive-card-overlay">
+        <p class="archive-year">2021</p>
+        <p class="archive-name">「존재의 무게」</p>
+        <p class="archive-detail">연극실험실 혜화동 1번지 / 8회 공연</p>
+      </div>
+    </div>
+
+    <div class="archive-card">
+      <div class="archive-card-placeholder"><span>사진 준비 중</span></div>
+      <div class="archive-card-overlay">
+        <p class="archive-year">2020</p>
+        <p class="archive-name">「고독의 형식들」</p>
+        <p class="archive-detail">세종M씨어터 / 6회 공연 (온라인 병행)</p>
+      </div>
+    </div>
+
+    <div class="archive-card">
+      <div class="archive-card-placeholder"><span>사진 준비 중</span></div>
+      <div class="archive-card-overlay">
+        <p class="archive-year">2019</p>
+        <p class="archive-name">「첫 번째 움직임」</p>
+        <p class="archive-detail">대학로 소극장 / 창단 공연</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 단원 소개 -->
+<section id="members" aria-labelledby="members-title">
+  <p class="section-eyebrow">004 — Ensemble</p>
+  <h2 class="section-title" id="members-title">단원 소개</h2>
+
+  <div class="members-grid">
+
+    <div class="member-card">
+      <p class="member-role">예술감독 / 연출</p>
+      <p class="member-name">홍길동</p>
+      <p class="member-bio">
+        독일 베를린 HfS 에른스트 부슈 연극학교 졸업.
+        그로토프스키 워크샵 수료. 연출작 다수.
+      </p>
+    </div>
+
+    <div class="member-card">
+      <p class="member-role">배우 / 움직임 디렉터</p>
+      <p class="member-name">이수진</p>
+      <p class="member-bio">
+        한국예술종합학교 연극원 졸업.
+        신체극 전공. 유럽 레지던시 참가.
+      </p>
+    </div>
+
+    <div class="member-card">
+      <p class="member-role">배우 / 드라마투르그</p>
+      <p class="member-name">박준혁</p>
+      <p class="member-bio">
+        서울대학교 철학과 / 연극학과 복수 전공.
+        텍스트 기반 퍼포먼스 연구.
+      </p>
+    </div>
+
+    <div class="member-card">
+      <p class="member-role">무대 · 조명 디자이너</p>
+      <p class="member-name">김미래</p>
+      <p class="member-bio">
+        홍익대학교 무대미술 전공.
+        국내외 협력 작품 30여 편.
+      </p>
+    </div>
+
+    <div class="member-card">
+      <p class="member-role">음악 · 사운드 디자이너</p>
+      <p class="member-name">최승우</p>
+      <p class="member-bio">
+        전자음악 작곡 및 라이브 퍼포먼스.
+        침묵과 소음 사이를 탐구.
+      </p>
+    </div>
+
+    <div class="member-card">
+      <p class="member-role">배우</p>
+      <p class="member-name">정다희</p>
+      <p class="member-bio">
+        중앙대학교 연극학과 졸업.
+        앙상블 합류 2021.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 오시는 길 -->
+<section id="location" aria-labelledby="location-title">
+  <div>
+    <p class="section-eyebrow">005 — Location</p>
+    <h2 class="section-title" id="location-title">오시는 길</h2>
+
+    <address class="location-address" style="font-style:normal;">
+      <strong>연습실 주소</strong>
+      서울특별시 종로구 대학로 10길 00<br>
+      ○○빌딩 3층
+
+      <strong>지하철</strong>
+      4호선 혜화역 2번 출구 도보 5분
+
+      <strong>버스</strong>
+      간선 102, 273 / 지선 7212<br>
+      혜화동 정류장 하차
+
+      <strong>주차</strong>
+      주차 공간이 없습니다.<br>대중교통을 이용해주세요.
+    </address>
+  </div>
+
+  <div>
+    <!-- 실제 서비스에서는 Google Maps embed 또는 카카오맵 삽입 -->
+    <div class="map-placeholder" role="img" aria-label="지도 준비 중">
+      지도 삽입 예정
+    </div>
+  </div>
+</section>
+
+<!-- 연락처 / 후원 -->
+<section id="contact" aria-labelledby="contact-title">
+  <div>
+    <p class="section-eyebrow">006 — Contact</p>
+    <h2 class="section-title" id="contact-title">연락처</h2>
+
+    <ul class="contact-list">
+      <li>
+        <span class="label">Email</span>
+        <span class="value"><a href="mailto:info@theaterraum.kr">info@theaterraum.kr</a></span>
+      </li>
+      <li>
+        <span class="label">Instagram</span>
+        <span class="value"><a href="https://instagram.com/" target="_blank" rel="noopener">@theaterraum_kr</a></span>
+      </li>
+      <li>
+        <span class="label">카카오채널</span>
+        <span class="value"><a href="#">테아터라움 철학하는 몸</a></span>
+      </li>
+      <li>
+        <span class="label">문의 시간</span>
+        <span class="value">평일 오후 2시 — 오후 7시</span>
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <p class="section-eyebrow">후원</p>
+    <h2 class="section-title" style="font-size:1.6rem;">함께 만드는<br>무대</h2>
+
+    <div class="support-box">
+      <p>
+        극단 테아터라움은 독립 예술단체로 운영됩니다.
+        여러분의 후원은 실험적인 공연과 신진 예술가 지원에
+        직접 사용됩니다.
+      </p>
+      <a href="mailto:info@theaterraum.kr?subject=후원문의" class="btn-support">
+        후원 문의하기
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 푸터 -->
+<footer>
+  <div class="footer-logo">
+    테아터라움 철학하는 몸
+    <span>Theaterraum — Seoul, Korea</span>
+  </div>
+  <div class="footer-copy">
+    © 2025 극단 테아터라움 철학하는 몸<br>
+    All rights reserved.
+  </div>
+</footer>
+
+</body>
+</html>
